@@ -132,13 +132,12 @@ char getUserGuess() {
 
   return userLetter;
 }
-
 [[nodiscard]] bool isValidGuess(const std::set<char> &alphabet,
                                 const char guess) {
   return alphabet.count(guess) > 0;
 }
 
-void checkGuess(const std::string_view &, const char guess,
+void checkGuess(const std::string &, const char guess,
                 std::set<char> &usedLetters, std::set<char> &wordLetters,
                 int &lives) {
   if (wordLetters.count(guess) > 0) {
@@ -157,42 +156,47 @@ void clearconsole() {
 
 void playHangman() {
   std::vector<std::string> words = {
-    "apple", "banana", "orange", "grape", "strawberry", "watermelon",
-    "chocolate", "cookie", "pizza", "pasta", "hamburger", "sandwich",
-    "computer", "laptop", "keyboard", "mouse", "monitor", "printer",
-    "sun", "moon", "star", "planet", "galaxy", "universe",
-    "cat", "dog", "bird", "elephant", "tiger", "lion",
-    "car", "bicycle", "motorcycle", "airplane", "train", "ship",
-    "book", "notebook", "pen", "pencil", "marker", "eraser", "ruler",
-    "school", "teacher", "student", "university", "college", "classroom",
-    "music", "guitar", "piano", "violin", "trumpet", "flute",
-    "beach", "mountain", "forest", "jungle", "river", "ocean",
-    "movie", "picture", "camera", "video", "actor", "actress",
-    "shirt", "pants", "shoes", "socks", "hat", "jacket",
-    "money", "wallet", "credit card", "coin", "dollar", "euro",
-    "love", "friend", "family", "kiss", "hug", "heart",
-    "life", "death", "time", "clock", "hour", "minute", "second",
-    "game", "play", "football", "basketball", "baseball", "tennis",
-    "phone", "call", "message", "telephone", "number", "smartphone",
-    "tree", "flower", "grass", "leaf", "root", "branch",
-    "house", "door", "window", "roof", "wall", "floor",
-    "chair", "table", "lamp", "light", "bed", "pillow",
-    "letter", "envelope", "postcard", "stamp", "send", "receive",
-    "water", "fire", "earth", "air", "wind", "rain", "snow",
-    "breakfast", "lunch", "dinner", "food", "eat", "drink",
-    "astronaut", "alien", "spaceship", "planet", "star", "galaxy",
-    "doctor", "nurse", "hospital", "sick", "medicine", "health",
-    "police", "firefighter", "soldier", "army", "navy", "air force",
-    "wedding", "bride", "groom", "marry", "married", "marriage",
-    "birthday", "cake", "party", "celebrate", "present", "gift",
-    "christmas", "santa", "claus", "reindeer", "elf", "present",
-    "halloween", "ghost", "witch", "monster", "vampire", "zombie",
-    "thanksgiving", "turkey", "pilgrim", "indian", "mayflower", "feast",
-    "easter", "egg", "bunny", "rabbit", "chocolate", "candy",
-    "valentine", "heart", "cupid", "love", "sweetheart", "chocolate",
-    "new year", "party", "celebrate", "january", "midnight", "countdown",
-    "zeus", "poseidon", "hades", "athena", "apollo", "ares",
-    "aladdin", "jasmine", "genie", "jafar", "abu", "carpet",
+    "APPLE", "BANANA", "ORANGE", "GRAPE", "STRAWBERRY", "WATERMELON",
+    "CHOCOLATE", "COOKIE", "PIZZA", "PASTA", "HAMBURGER", "SANDWICH",
+    "COMPUTER", "LAPTOP", "KEYBOARD", "MOUSE", "MONITOR", "PRINTER",
+    "SUN", "MOON", "STAR", "PLANET", "GALAXY", "UNIVERSE",
+    "CAT", "DOG", "BIRD", "ELEPHANT", "TIGER", "LION",
+    "CAR", "BICYCLE", "MOTORCYCLE", "AIRPLANE", "TRAIN", "SHIP",
+    "BOOK", "NOTEBOOK", "PEN", "PENCIL", "MARKER", "ERASER", "RULER",
+    "SCHOOL", "TEACHER", "STUDENT", "UNIVERSITY", "COLLEGE", "CLASSROOM",
+    "MUSIC", "GUITAR", "PIANO", "VIOLIN", "TRUMPET", "FLUTE",
+    "BEACH", "MOUNTAIN", "FOREST", "JUNGLE", "RIVER", "OCEAN",
+    "MOVIE", "PICTURE", "CAMERA", "VIDEO", "ACTOR", "ACTRESS",
+    "SHIRT", "PANTS", "SHOES", "SOCKS", "HAT", "JACKET",
+    "MONEY", "WALLET", "CREDIT CARD", "COIN", "DOLLAR", "EURO",
+    "LOVE", "FRIEND", "FAMILY", "KISS", "HUG", "HEART",
+    "LIFE", "DEATH", "TIME", "CLOCK", "HOUR", "MINUTE", "SECOND",
+    "GAME", "PLAY", "FOOTBALL", "BASKETBALL", "BASEBALL", "TENNIS",
+    "PHONE", "CALL", "MESSAGE", "TELEPHONE", "NUMBER", "SMARTPHONE",
+    "TREE", "FLOWER", "GRASS", "LEAF", "ROOT", "BRANCH",
+    "HOUSE", "DOOR", "WINDOW", "ROOF", "WALL", "FLOOR",
+    "CHAIR", "TABLE", "LAMP", "LIGHT", "BED", "PILLOW",
+    "LETTER", "ENVELOPE", "POSTCARD", "STAMP", "SEND", "RECEIVE",
+    "WATER", "FIRE", "EARTH", "AIR", "WIND", "RAIN", "SNOW",
+    "BREAKFAST", "LUNCH", "DINNER", "FOOD", "EAT", "DRINK",
+    "ASTRONAUT", "ALIEN", "SPACESHIP", "PLANET", "STAR", "GALAXY",
+    "DOCTOR", "NURSE", "HOSPITAL", "SICK", "MEDICINE", "HEALTH",
+    "POLICE", "FIREFIGHTER", "SOLDIER", "ARMY", "NAVY", "AIR FORCE",
+    "WEDDING", "BRIDE", "GROOM", "MARRY", "MARRIED", "MARRIAGE",
+    "BIRTHDAY", "CAKE", "PARTY", "CELEBRATE", "PRESENT", "GIFT",
+    "CHRISTMAS", "SANTA", "CLAUS", "REINDEER", "ELF", "PRESENT",
+    "HALLOWEEN", "GHOST", "WITCH", "MONSTER", "VAMPIRE", "ZOMBIE",
+    "THANKSGIVING", "TURKEY", "PILGRIM", "INDIAN", "MAYFLOWER", "FEAST",
+    "EASTER", "EGG", "BUNNY", "RABBIT", "CHOCOLATE", "CANDY",
+    "VALENTINE", "HEART", "CUPID", "LOVE", "SWEETHEART", "CHOCOLATE",
+    "NEW YEAR", "PARTY", "CELEBRATE", "JANUARY", "MIDNIGHT", "COUNTDOWN",
+    "ZEUS", "POSEIDON", "HADES", "ATHENA", "APOLLO", "ARES",
+    "HERA", "APHRODITE", "HERMES", "ARTEMIS", "HEPHAESTUS", "HESTIA",
+    "DEMETER", "DIONYSUS", "HERCULES", "PERSEUS", "ACHILLES", "PANDORA",
+    "SPHINX", "MEDUSA", "PEGASUS", "CENTAUR", "MINOTAUR", "CERBERUS",
+    "ATLAS", "PROMETHEUS", "ICARUS", "ODYSSEUS", "PENELOPE", "CIRCE",
+    "THOR", "ODIN", "LOKI", "FREYJA", "FREYR", "TYR",
+    "ACHILLES", "AGAMEMNON", "HELEN", "HECTOR", "PARIS", "PATROCLUS",
   };
 
   // Transform the words to uppercase for easier comparison
@@ -259,7 +263,7 @@ void playHangman() {
     std::cout << "Do you want to play again? (Y/N) ";
     char playAgain{};
     std::cin >> playAgain;
-    playAgain = std::toupper(playAgain);
+    playAgain = static_cast<char>(std::toupper(playAgain));
 
     if (playAgain != 'Y') {
       break;
@@ -277,4 +281,3 @@ int main() {
   ::playHangman();
   return 0;
 }
-
