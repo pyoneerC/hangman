@@ -45,4 +45,4 @@ Credits to [kying18](https://github.com/kying18) for the initial idea and the vi
 
 This Hangman game is open-source and available under the [MIT License](LICENSE.md). Feel free to use, modify, and distribute the code as per the license terms.
 
-Enjoy playing Hangman!
+Enjoy playing [Hangman!](https://tinyurl.com/bdzfr5x4)
