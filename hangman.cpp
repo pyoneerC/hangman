@@ -268,11 +268,8 @@ void playHangman() {
     ::clearconsole();
   }
 
-  int rounds{};
-  ++rounds;
-
   std::cout << "Thanks for playing!" << '\n';
-  std::cout << "You guessed " << guess << "/" << rounds
+  std::cout << "You guessed " << guess
             << " word(s) in total!" << '\n';
 }
 

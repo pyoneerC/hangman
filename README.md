@@ -37,6 +37,10 @@ This repository contains a simple implementation of the classic Hangman game usi
 
 This Hangman game implementation is intended as a simple showcase of C++ programming and can be expanded and enhanced in various ways. Contributors are welcome to suggest improvements, add new features, or refactor the code to improve its readability and maintainability.
 
+### Special Thanks
+
+Credits to [kying18](https://github.com/kying18) for the initial idea and the visual hangmans.
+
 **License**
 
 This Hangman game is open-source and available under the [MIT License](LICENSE.md). Feel free to use, modify, and distribute the code as per the license terms.
