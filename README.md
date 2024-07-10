@@ -2,6 +2,8 @@
 
 This repository contains a simple implementation of the classic Hangman game using C++. The game randomly selects a word from a predefined list, and the player's task is to guess the word letter by letter before running out of attempts. The game provides visual feedback through a hangman visualization to indicate the player's progress.
 
+[hangman game](hangman.png)
+
 ## **How to Play**
 
 1. Clone or download the repository to your local machine.
