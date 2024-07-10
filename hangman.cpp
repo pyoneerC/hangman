@@ -7,6 +7,11 @@
 #include <cctype>
 #include <algorithm>
 
+/**
+ * Get a valid word from the list of words
+ * @param words The list of words
+ * @return A valid word
+ */
 std::string getValidWord(const std::vector<std::string> &words) {
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -79,6 +84,10 @@ std::map<int, std::string> visMan = {
             )"}
 };
 
+/**
+ * Display the difficulty of the word based on its length
+ * @param wordDisplay The word to display
+ */
 void displayDifficulty(const std::string_view &wordDisplay) {
   const int hard = 12;
   const int medium = 8;
@@ -132,11 +141,20 @@ char getUserGuess() {
 
   return userLetter;
 }
+
 [[nodiscard]] bool isValidGuess(const std::set<char> &alphabet,
                                 const char guess) {
   return alphabet.count(guess) > 0;
 }
 
+/**
+ * Check if the guess is correct
+ * @param word The word to guess
+ * @param guess The letter to guess
+ * @param usedLetters The set of used letters
+ * @param wordLetters The set of word letters
+ * @param lives The number of lives
+ */
 void checkGuess(const std::string &, const char guess,
                 std::set<char> &usedLetters, std::set<char> &wordLetters,
                 int &lives) {
@@ -154,6 +172,13 @@ void clearconsole() {
   std::cout << "\033[2J\033[1;1H";
 }
 
+/**
+* Play the hangman game
+*
+* The game will randomly select a word from the list of words
+* and the player will have to guess the word by guessing the letters
+* in the word.
+*/
 void playHangman() {
   std::vector<std::string> words = {
     "APPLE", "BANANA", "ORANGE", "GRAPE", "STRAWBERRY", "WATERMELON",
