@@ -6,6 +6,8 @@ This repository contains a simple implementation of the classic Hangman game usi
 
 ![hangman game](hangman.png)
 
+![demohangman](demohangman.gif)
+
 ## **How to Play**
 
 1. Clone or download the repository to your local machine.
