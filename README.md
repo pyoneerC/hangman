@@ -2,6 +2,8 @@
 
 This repository contains a simple implementation of the classic Hangman game using C++. The game randomly selects a word from a predefined list, and the player's task is to guess the word letter by letter before running out of attempts. The game provides visual feedback through a hangman visualization to indicate the player's progress.
 
+[Play Online Now!](https://tinyurl.com/bdzfr5x4)
+
 ![hangman game](hangman.png)
 
 ## **How to Play**
@@ -46,5 +48,3 @@ Credits to [kying18](https://github.com/kying18) for the initial idea and the vi
 **License**
 
 This Hangman game is open-source and available under the [MIT License](LICENSE). Feel free to use, modify, and distribute the code as per the license terms.
-
-Enjoy playing [Hangman!](https://tinyurl.com/bdzfr5x4)
