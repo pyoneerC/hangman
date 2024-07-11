@@ -13,10 +13,13 @@
  * @return A valid word
  */
 std::string getValidWord(const std::vector<std::string> &words) {
+
+  // RNG for random word selection
   std::random_device rd;
   std::mt19937 gen(rd());
   std::string word;
 
+// Get a random word from the list of words
   do {
     word = words[gen() % words.size()];
   } while ((word.find('-') != std::string::npos)
@@ -25,6 +28,7 @@ std::string getValidWord(const std::vector<std::string> &words) {
   return word;
 }
 
+// Visual representation of the hangman
 std::map<int, std::string> visMan = {
   {0, R"(
                 ___________
@@ -89,8 +93,10 @@ std::map<int, std::string> visMan = {
  * @param wordDisplay The word to display
  */
 void displayDifficulty(const std::string_view &wordDisplay) {
+
   const int hard = 12;
   const int medium = 8;
+
   if (wordDisplay.length() > hard) {
     std::cout << "Difficulty: Hard" << '\n';
   } else if (wordDisplay.length() > medium) {
@@ -104,13 +110,20 @@ void displayVisual(const int lives) {
   std::cout << ::visMan[lives] << '\n';
 }
 
+/**
+ * Display the word with the letters that have been guessed
+ * @param word The word to display
+ * @param usedLetters The set of used letters
+ */
 void displayWord(const std::string &word,
                  const std::set<char> &usedLetters) {
   std::string wordDisplay;
+
   for (const char &letter: word) {
     if (usedLetters.count(letter) > 0) {
       wordDisplay += letter;
     } else {
+      // If the letter is not in the used letters, display a dash
       wordDisplay += '-';
     }
     wordDisplay += " ";
@@ -123,10 +136,12 @@ char getUserGuess() {
   char userLetter{};
   std::string input;
 
+  // Main loop to get a valid letter from the user
   while (true) {
     std::cout << "Guess a letter: ";
     std::cin >> input;
 
+    // Check if the input is a single letter
     if (1 == input.length()) {
       userLetter = static_cast<char>
       (std::toupper((input[0])));
@@ -135,6 +150,7 @@ char getUserGuess() {
       }
     }
     std::cout << "\nInvalid input! Please enter a single letter.\n";
+    // Clear the input buffer
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
@@ -161,6 +177,7 @@ void checkGuess(const std::string &, const char guess,
   if (wordLetters.count(guess) > 0) {
     wordLetters.erase(guess);
   } else {
+    // Incorrect guess
     --lives;
     std::cout << "\nYour letter, " << guess
               << ", is not in the word." << '\n';
@@ -180,6 +197,8 @@ void clearconsole() {
 * in the word.
 */
 void playHangman() {
+
+  // List of words to guess
   std::vector<std::string> words = {
     "APPLE", "BANANA", "ORANGE", "GRAPE", "STRAWBERRY", "WATERMELON",
     "CHOCOLATE", "COOKIE", "PIZZA", "PASTA", "HAMBURGER", "SANDWICH",
@@ -240,6 +259,7 @@ void playHangman() {
 
   int guess = 0;
 
+  // Main loop to play the game
   while (true) {
     std::string word = ::getValidWord(words);
     std::set<char> wordLetters(word.begin(), word.end());
@@ -248,6 +268,7 @@ void playHangman() {
 
     std::cout << "You are starting a new game!\n";
 
+    // Main loop to guess the word
     while ((!wordLetters.empty()) && (lives > 0)) {
       std::cout << "You have " << lives
                 << " lives left and you have used these letters: ";
@@ -264,6 +285,7 @@ void playHangman() {
 
       char userGuess = ::getUserGuess();
 
+      // Check if the guess is valid
       while (!::isValidGuess(alphabet, userGuess)) {
         std::cout << "\nThat is not a valid letter. Guess another letter: ";
         userGuess = ::getUserGuess();
@@ -277,6 +299,7 @@ void playHangman() {
       }
     }
 
+    // Display the result of the game
     if (0 == lives) {
       std::cout << ::visMan[lives] << '\n';
       std::cout << "You died, sorry. The word was " << word << '\n';
@@ -291,9 +314,11 @@ void playHangman() {
     playAgain = static_cast<char>(std::toupper(playAgain));
 
     if (playAgain != 'Y') {
+      // Exit the loop and end the game
       break;
     }
 
+    // Clear the console and start a new game (still in the loop)
     ::clearconsole();
   }
 
